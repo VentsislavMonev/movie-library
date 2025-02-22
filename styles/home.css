@@ -207,12 +207,20 @@ body {
     cursor: pointer;
 }
 
-.asc:hover {
+.sort-option.asc:has(input[type="radio"]:checked) {
+    background: var(--hover-movie-red); 
+}
+
+.sort-option.desc:has(input[type="radio"]:checked) {
+    background: var(--hover-movie-blue)
+}
+
+.sort-option.asc:hover {
     background-color: var(--hover-movie-red);
     cursor: pointer;
 }
 
-.desc:hover {
+.sort-option.desc:hover {
     background-color: var(--hover-movie-blue);
     cursor: pointer;
 }
@@ -243,7 +251,7 @@ body {
     height: 100%;
 }
 
-.movie-catalog ol {
+.movie-catalog ul {
     margin-top: 2rem;
 
     width: 100%;
@@ -252,7 +260,7 @@ body {
     place-items: center;
     align-items: start;
     grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 1rem;
+    gap: 1rem
 }
 
 .movie {
@@ -290,6 +298,9 @@ body {
     font-weight: bold;
 
     margin: 0.25rem 0;
+
+    max-width: 200px; 
+  overflow-wrap: break-word; 
 }
 
 .movie-year {
