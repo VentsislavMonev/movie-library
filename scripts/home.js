@@ -12,6 +12,7 @@ const desc_input = document.getElementById("descending-option");
 const search_element = document.querySelector(".search");
 const search_svg = document.getElementById("search_icon");
 
+
 async function fetchMovies(search_input) {
   let currentPage = 1;
   let moviesFetched = 0;
@@ -50,22 +51,22 @@ function renderMovies(movies) {
     li.classList.add("movie");
     li.innerHTML = `
     <div class="movie-wrapper">
-      <div class="movie-poster">
-        <img src="${movie.Poster !== 'N/A' ? movie.Poster : 'media/default_movie.svg'}" alt="media/default_movie.svg" style="width: 100%; height: auto;">
-      </div>
-      <div class="movie-info">
-        <h3 class="movie-title">${movie.Title}</h3>
-        <div class="year-like-div">
-          <p class="movie-year">${movie.Year}</p>
-          <svg fill="#000000" viewBox="0 0 24 24" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color like-button">
-          <g class="likebtn_bgCarrier" stroke-width="0"/>
-          <g class="likebtn_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
-          <g class="likebtn_iconCarrier">
-          <path class="like-btn-path" d="M19.57,5.44a4.91,4.91,0,0,1,0,6.93L12,20,4.43,12.37A4.91,4.91,0,0,1,7.87,4a4.9,4.9,0,0,1,3.44,1.44,4.46,4.46,0,0,1,.69.88,4.46,4.46,0,0,1,.69-.88,4.83,4.83,0,0,1,6.88,0Z" style="fill: none; stroke: #f8fafc; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/>
-          </g>
-          </svg>
-        </div>
-      </div>                        
+    <div class="movie-poster">
+    <img src="${movie.Poster !== 'N/A' ? movie.Poster : 'media/default_movie.svg'}" alt="media/default_movie.svg" style="width: 100%; height: auto;">
+    </div>
+    <div class="movie-info">
+    <h3 class="movie-title">${movie.Title}</h3>
+    <div class="year-like-div">
+    <p class="movie-year">${movie.Year}</p>
+    <svg fill="#000000" viewBox="0 0 24 24" data-name="Line Color" xmlns="http://www.w3.org/2000/svg" class="icon line-color like-button">
+    <g class="likebtn_bgCarrier" stroke-width="0"/>
+    <g class="likebtn_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"/>
+    <g class="likebtn_iconCarrier">
+    <path class="like-btn-path" d="M19.57,5.44a4.91,4.91,0,0,1,0,6.93L12,20,4.43,12.37A4.91,4.91,0,0,1,7.87,4a4.9,4.9,0,0,1,3.44,1.44,4.46,4.46,0,0,1,.69.88,4.46,4.46,0,0,1,.69-.88,4.83,4.83,0,0,1,6.88,0Z" style="fill: none; stroke: #f8fafc; stroke-linecap: round; stroke-linejoin: round; stroke-width: 2;"/>
+    </g>
+    </svg>
+    </div>
+    </div>                        
     </div>`;
     movieList.appendChild(li);
   });
@@ -93,7 +94,7 @@ if (urlParams.has('search')) {
   fetchMovies(search_param)
   .then(fetchedMovies => {        
     movies=fetchedMovies;
-
+    
     renderSortedMovies(movies);
     if (movies.length === 0) {
       document.querySelector(".movie-not-found").style.visibility = "visible";
@@ -113,6 +114,7 @@ if (urlParams.has('search')) {
   .catch(error => console.error("Failed to load movies:", error));
 }
 
+// sort logic
 
 function sort_button_click_event(clicked_sort_input, other_sort_input)
 { 
@@ -125,7 +127,7 @@ function sort_button_click_event(clicked_sort_input, other_sort_input)
   }
   renderSortedMovies(movies);
 }
-// sort logic
+
 asc_button.addEventListener("click", e => {
   e.preventDefault();
   sort_button_click_event(asc_input,desc_input);
@@ -150,6 +152,8 @@ search_element.addEventListener("keydown", e => {
   if (e.key === "Enter") handle_search();
 });
 
-
-
-
+// redirect if the logo is clicked
+const logo_wrapper = document.querySelector(".logo-wrapper");
+logo_wrapper.addEventListener("click", e => {
+  window.location.assign(`/home.html`);
+});
