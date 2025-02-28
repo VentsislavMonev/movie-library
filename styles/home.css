@@ -42,8 +42,6 @@ body {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
-    
-
 }
 
 .logo-wrapper {
@@ -51,10 +49,14 @@ body {
     justify-content: center;
 
     height: 5rem;
+    width: 100%;
+
+    cursor: pointer;
 }
 
 .logo {
     object-fit: contain;
+    width: 100%;
 }
 
 .window {
@@ -80,39 +82,39 @@ body {
     gap: 0.5rem;
 }
 
-.navigation-tab{
-    
-}
+
 .tab {
     display: flex;    
     gap: 0.5rem;
     align-items: center;
-
+    
     width: 100%;
-
+    
     color: var(--aside-text);
-
+    
     cursor: pointer;
-
+    
     background-color: transparent;
     border: none;
     border-radius: 3rem;
-
-    padding: 0.5rem;
-
-    transition: background-color 0.5s ease;
-
-
-}
-
-.navigation-tab:hover{
     
+    padding: 0.5rem;
+    
+    transition: background-color 0.5s ease;   
 }
 
 .tab:hover {
     background-color: #282828;
 }
 
+.selected-tab {
+    background-color: #282828;
+    /* border: 1px solid var(--aside-text); */
+}
+
+.selected-tab:hover {
+    background-color: #333333;
+}
 
 .aside-section {
     height: 100%;

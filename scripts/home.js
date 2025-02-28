@@ -12,6 +12,7 @@ const desc_input = document.getElementById("descending-option");
 const search_element = document.querySelector(".search");
 const search_svg = document.getElementById("search_icon");
 
+const all_tab = document.querySelector(".all-btn");
 
 async function fetchMovies(search_input) {
   let currentPage = 1;
@@ -90,7 +91,7 @@ function renderSortedMovies(movies) {
 if (urlParams.has('search')) {
   // fetch movies with search parameter
   const search_param = urlParams.get("search");
-  const sort_param = urlParams.get("sort");
+  
   fetchMovies(search_param)
   .then(fetchedMovies => {        
     movies=fetchedMovies;
@@ -102,6 +103,7 @@ if (urlParams.has('search')) {
     else {
       document.querySelector(".movie-not-found").style.visibility = "hidden";
     }
+    all_tab.classList.add("selected-tab");
   })
   .catch(error => console.error("Failed to load searched movies:", error));
 }else {
@@ -110,6 +112,8 @@ if (urlParams.has('search')) {
   .then(fetchedMovies => {
     movies=fetchedMovies;
     renderMovies(movies);
+
+    all_tab.classList.add("selected-tab");
   })
   .catch(error => console.error("Failed to load movies:", error));
 }
@@ -152,8 +156,49 @@ search_element.addEventListener("keydown", e => {
   if (e.key === "Enter") handle_search();
 });
 
+function redirect_to_home() {
+  if (
+    window.location.pathname !== "/home.html" || 
+    window.location.search 
+     ) {
+    window.location.assign("/home.html");
+  }
+}
+
 // redirect if the logo is clicked
 const logo_wrapper = document.querySelector(".logo-wrapper");
-logo_wrapper.addEventListener("click", e => {
-  window.location.assign(`/home.html`);
+logo_wrapper.addEventListener("click", redirect_to_home);
+
+// aside tabs logic
+if (
+  window.location.pathname !== "/home.html" || 
+  window.location.search 
+   ) {
+    all_tab.classList.remove("selected-tab");
+}
+
+const tabElements = document.querySelectorAll('.tab');
+
+tabElements.forEach(tab => {
+  tab.addEventListener('click', function() {
+    // First, remove "selected_tab" class from all tabs
+    tabElements.forEach(t => {
+      t.classList.remove('selected-tab');
+    });
+    
+    this.classList.add('selected-tab');
+  });
 });
+
+
+
+
+// to do  //
+
+// sign up and sign in and sign out
+// liking videos
+// details of each movie
+// adding to watch
+// comments on the movie details page
+// adding a movie
+// deleting a movie
